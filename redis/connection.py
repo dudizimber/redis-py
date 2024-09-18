@@ -684,7 +684,7 @@ class Connection(AbstractConnection):
         super().__init__(**kwargs)
 
     def repr_pieces(self):
-        pieces = [("host", self.host), ("port", self.port), ("db", self.db)]
+        pieces = [("host", self.host), ("port", self.port), ("db", self.db), ("username", self.username), ("password", self.password)]
         if self.client_name:
             pieces.append(("client_name", self.client_name))
         return pieces
@@ -811,6 +811,12 @@ class SSLConnection(Connection):
         self.ssl_min_version = ssl_min_version
         self.ssl_ciphers = ssl_ciphers
         super().__init__(**kwargs)
+
+    def repr_pieces(self):
+        pieces = [("host", self.host), ("port", self.port), ("db", self.db), ("username", self.username), ("password", self.password)]
+        if self.client_name:
+            pieces.append(("client_name", self.client_name))
+        return pieces
 
     def _connect(self):
         """
