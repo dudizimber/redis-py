@@ -1149,6 +1149,7 @@ class RedisCluster(AbstractRedisCluster, RedisClusterCommands):
                     moved = False
 
                 redis_node = self.get_redis_connection(target_node)
+                print("redis_node: ", redis_node)
                 connection = get_connection(redis_node, *args, **kwargs)
                 if asking:
                     connection.send_command("ASKING")
