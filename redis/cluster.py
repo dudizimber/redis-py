@@ -1110,6 +1110,7 @@ class RedisCluster(AbstractRedisCluster, RedisClusterCommands):
                 return self._process_result(args[0], res, **kwargs)
             except Exception as e:
                 if retry_attempts > 0 and type(e) in self.__class__.ERRORS_ALLOW_RETRY:
+                    print(time.time(), " - retry_attempts: ", retry_attempts, "is_default_node: ", is_default_node)
                     if is_default_node:
                         # Replace the default cluster node
                         self.replace_default_node()
